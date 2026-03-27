@@ -224,10 +224,28 @@ async function generateVideo() {
   // Clear previous log entries
   logViewerBody.innerHTML = "";
 
+  const aiModel = document.getElementById("aiModel");
+  const paragraphNumber = document.getElementById("paragraphNumber");
+  const youtubeUploadToggle = document.getElementById("youtubeUploadToggle");
+  const useMusicToggle = document.getElementById("useMusicToggle");
+  const threads = document.getElementById("threads");
+  const subtitlesPosition = document.getElementById("subtitlesPosition");
+  const customPrompt = document.getElementById("customPrompt");
+  const subtitlesColor = document.getElementById("subtitlesColor");
+
   const data = {
     searchTerms: parsed.map(item => item.searchTerms),
     videoSubject: parsed.map(item => item.videoSubject).join(' '),
     pexelsApi: pexelsApi.value.trim(),
+    aiModel: aiModel ? aiModel.value : "llama3.1:8b",
+    voice: voice ? voice.value : "en_us_001",
+    paragraphNumber: paragraphNumber ? (parseInt(paragraphNumber.value) || 1) : 1,
+    automateYoutubeUpload: youtubeUploadToggle ? youtubeUploadToggle.checked : false,
+    useMusic: useMusicToggle ? useMusicToggle.checked : false,
+    threads: threads ? threads.value : 4,
+    subtitlesPosition: subtitlesPosition ? subtitlesPosition.value : "center,center",
+    customPrompt: customPrompt ? customPrompt.value : "",
+    color: subtitlesColor ? subtitlesColor.value : "#FFFF00"
   };
 
   try {
@@ -256,12 +274,13 @@ async function generateVideo() {
     showToast("Connection error. Is the backend server running?", "error");
     setGeneratingState(false);
     generateButton.innerHTML = originalText;
-  // Spinner animation
-  const style = document.createElement('style');
-  style.innerHTML = `@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`;
-  document.head.appendChild(style);
   }
 }
+
+// Spinner animation
+const style = document.createElement('style');
+style.innerHTML = `@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`;
+document.head.appendChild(style);
 
 generateButton.addEventListener("click", generateVideo);
 cancelButton.addEventListener("click", cancelGeneration);

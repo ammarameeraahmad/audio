@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MoneyPrinter Shorts</title>
+    <title>MoneyPrinter</title>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💸</text></svg>"
@@ -178,7 +178,7 @@
 
       .form-textarea {
         resize: vertical;
-        min-height: 200px;
+        min-height: 44px;
         line-height: 1.55;
       }
 
@@ -722,25 +722,21 @@
     <main class="container">
       <header class="header">
         <h1 class="title">
-          MoneyPrinter<span class="title-emoji"> 📱</span>
+          MoneyPrinter<span class="title-emoji"> 💸</span>
         </h1>
         <p class="subtitle">Automate YouTube Shorts with AI</p>
       </header>
 
       <div class="card">
-        <!-- Script Input -->
+        <!-- Subject -->
         <div class="form-group">
-          <label for="videoScript" class="label">Video Script</label>
+          <label for="videoSubject" class="label">Video Subject</label>
           <textarea
-            id="videoScript"
-            name="videoScript"
+            id="videoSubject"
+            name="videoSubject"
             class="form-textarea"
-            rows="10"
-            placeholder="Paste your script here in the format:
-# Timestamp	Pexels Search Query
-1	00:00–00:08	welcome intro dark background
-2	00:08–00:25	two office buildings corporate
-..."
+            rows="3"
+            placeholder="What should the video be about?"
           ></textarea>
         </div>
 
@@ -904,18 +900,63 @@
                 </div>
               </div>
 
-              <!-- Threads -->
+              <!-- Threads + Paragraphs -->
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="threads" class="label">Threads</label>
+                  <input
+                    type="number"
+                    id="threads"
+                    name="threads"
+                    class="form-input"
+                    value="2"
+                    min="1"
+                    max="100"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="paragraphNumber" class="label">Paragraphs</label>
+                  <input
+                    type="number"
+                    id="paragraphNumber"
+                    name="paragraphNumber"
+                    class="form-input"
+                    value="1"
+                    min="1"
+                    max="100"
+                  />
+                </div>
+              </div>
+
+              <!-- Songs Folder -->
               <div class="form-group">
-                <label for="threads" class="label">Threads</label>
+                <label for="songFiles" class="label"
+                  >Songs Folder
+                  <span class="label-hint"
+                    >&mdash; select a folder with MP3 files</span
+                  ></label
+                >
                 <input
-                  type="number"
-                  id="threads"
-                  name="threads"
+                  type="file"
+                  id="songFiles"
+                  name="songFiles"
                   class="form-input"
-                  value="2"
-                  min="1"
-                  max="100"
+                  accept=".mp3"
+                  webkitdirectory
                 />
+              </div>
+
+              <!-- Custom Prompt -->
+              <div class="form-group">
+                <label for="customPrompt" class="label">Custom Prompt</label>
+                <textarea
+                  id="customPrompt"
+                  name="customPrompt"
+                  class="form-textarea"
+                  rows="3"
+                  placeholder="Override the default AI prompt"
+                ></textarea>
               </div>
 
               <!-- Toggles -->
@@ -942,6 +983,18 @@
                     <span class="toggle-thumb"></span>
                   </span>
                   <span class="toggle-text">Use Music</span>
+                </label>
+
+                <label class="toggle">
+                  <input
+                    type="checkbox"
+                    id="reuseChoicesToggle"
+                    name="reuseChoicesToggle"
+                  />
+                  <span class="toggle-track">
+                    <span class="toggle-thumb"></span>
+                  </span>
+                  <span class="toggle-text">Reuse Choices</span>
                 </label>
               </div>
             </div>
@@ -971,7 +1024,7 @@
                 d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
               />
             </svg>
-            Generate Shorts
+            Generate
           </button>
           <button
             type="button"
@@ -994,6 +1047,6 @@
     </main>
 
     <div id="toastContainer" class="toast-container"></div>
-    <script src="app-shorts.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

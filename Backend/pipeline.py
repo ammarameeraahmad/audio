@@ -2,6 +2,8 @@ import os
 import shutil
 import subprocess
 
+from typing import cast
+
 from apiclient.errors import HttpError
 from moviepy import (
     AudioFileClip,
@@ -97,6 +99,10 @@ def run_generation_pipeline(
     video_urls = []
     it = 15
     min_dur = 10
+    key = data.get("pexelsApi") or os.getenv("PEXELS_API_KEY")
+    if not key:
+        raise RuntimeError("Pexels API key is required.")
+    pexels_api_key = cast(str, key)
 
     for search_term in search_terms:
         guard_cancelled()

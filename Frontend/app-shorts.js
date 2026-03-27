@@ -19,10 +19,14 @@ const reuseChoicesToggle = document.getElementById("reuseChoicesToggle");
 const logViewer = document.getElementById("logViewer");
 const logViewerBody = document.getElementById("logViewerBody");
 const logClearBtn = document.getElementById("logClearBtn");
-const backendHost = window.location.hostname || "localhost";
-const backendProtocol = window.location.protocol || "http:";
+
+// Default to localhost if hosted on GitHub Pages (since backend runs locally)
+const isGithubPages = window.location.hostname.includes("github.io");
+const backendHost = isGithubPages ? "localhost" : (window.location.hostname || "localhost");
+const backendProtocol = isGithubPages ? "http:" : (window.location.protocol || "http:");
+
 const API_BASE_URL = `${backendProtocol}//${backendHost}:8080`;
-const API_FALLBACK_URL = `http://${backendHost}:8080`;
+const API_FALLBACK_URL = `http://localhost:8080`;
 
 let activeJobId = null;
 let pollHandle = null;

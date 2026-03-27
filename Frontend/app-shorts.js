@@ -9,6 +9,13 @@ const advancedPanel = document.getElementById("advancedOptions");
 const statusArea = document.getElementById("statusArea");
 const colorDot = document.getElementById("colorDot");
 const subtitlesColor = document.getElementById("subtitlesColor");
+const subtitlesPosition = document.getElementById("subtitlesPosition");
+const threads = document.getElementById("threads");
+const paragraphNumber = document.getElementById("paragraphNumber");
+const customPrompt = document.getElementById("customPrompt");
+const youtubeUploadToggle = document.getElementById("youtubeUploadToggle");
+const useMusicToggle = document.getElementById("useMusicToggle");
+const reuseChoicesToggle = document.getElementById("reuseChoicesToggle");
 const logViewer = document.getElementById("logViewer");
 const logViewerBody = document.getElementById("logViewerBody");
 const logClearBtn = document.getElementById("logClearBtn");
@@ -301,12 +308,12 @@ async function generateVideo() {
     videoSubject: script, // Send script as subject, backend will parse
     aiModel: aiModel.value || "llama3.1:8b",
     voice: voice.value,
-    paragraphNumber: 1, // Default
-    automateYoutubeUpload: document.getElementById("youtubeUploadToggle").checked,
-    useMusic: document.getElementById("useMusicToggle").checked,
-    threads: document.getElementById("threads").value,
-    subtitlesPosition: document.getElementById("subtitlesPosition").value,
-    customPrompt: "",
+    paragraphNumber: parseInt(paragraphNumber.value) || 1,
+    automateYoutubeUpload: youtubeUploadToggle.checked,
+    useMusic: useMusicToggle.checked,
+    threads: threads.value,
+    subtitlesPosition: subtitlesPosition.value,
+    customPrompt: customPrompt.value,
     color: subtitlesColor.value,
     searchTerms: searchTerms, // Add parsed search terms
   };
@@ -357,12 +364,15 @@ logClearBtn.addEventListener("click", () => {
 const toggleIds = [
   "youtubeUploadToggle",
   "useMusicToggle",
+  "reuseChoicesToggle",
 ];
 const fieldIds = [
   "voice",
   "threads",
   "subtitlesPosition",
   "subtitlesColor",
+  "paragraphNumber",
+  "customPrompt",
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {

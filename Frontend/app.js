@@ -204,14 +204,15 @@ async function generateVideo() {
   const lines = script.split('\n').filter(line => line.trim());
   const parsed = lines.map(line => {
     const parts = line.split('\t');
+    // Jika ada 3 kolom, ambil kolom ke-3 sebagai searchTerms, kolom 1 sebagai videoSubject
     return {
       videoSubject: parts[0] || '',
-      searchTerms: parts[1] || ''
+      searchTerms: parts[2] ? parts[2] : (parts[1] || '')
     };
   });
 
   if (parsed.some(item => !item.videoSubject || !item.searchTerms)) {
-    showToast("Each line must have videoSubject and searchTerms separated by tab.", "error");
+    showToast("Each line must have at least 2 tab-separated columns (No. & Search Query).", "error");
     return;
   }
 

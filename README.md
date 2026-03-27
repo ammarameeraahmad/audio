@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MoneyPrinter 💸
 
 > ♥︎ Sponsor: The Best AI Chat App: [shiori.ai](https://www.shiori.ai)
@@ -81,3 +82,6 @@ Pull Requests will not be accepted for the time-being.
 ## License 📝
 
 See [`LICENSE`](LICENSE) file for more information.
+=======
+# audio
+>>>>>>> 2251515a609d462208d2670c4f1957c8181095e6

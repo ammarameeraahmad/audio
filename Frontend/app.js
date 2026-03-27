@@ -217,6 +217,8 @@ async function generateVideo() {
   }
 
   generateButton.disabled = true;
+  const originalText = generateButton.innerHTML;
+  generateButton.innerHTML = '<span class="spinner" style="margin-right:8px;width:16px;height:16px;border:2px solid #fff;border-top:2px solid #16a34a;border-radius:50%;display:inline-block;vertical-align:middle;animation:spin 0.8s linear infinite;"></span>Generating...';
   setGeneratingState(true);
 
   // Clear previous log entries
@@ -248,10 +250,16 @@ async function generateVideo() {
     } else {
       showToast(result.message, "error");
       setGeneratingState(false);
+      generateButton.innerHTML = originalText;
     }
   } catch {
     showToast("Connection error. Is the backend server running?", "error");
     setGeneratingState(false);
+    generateButton.innerHTML = originalText;
+  // Spinner animation
+  const style = document.createElement('style');
+  style.innerHTML = `@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`;
+  document.head.appendChild(style);
   }
 }
 

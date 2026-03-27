@@ -222,7 +222,8 @@ async function generateVideo() {
   logViewerBody.innerHTML = "";
 
   const data = {
-    scripts: parsed,
+    searchTerms: parsed.map(item => item.searchTerms),
+    videoSubject: parsed.map(item => item.videoSubject).join(' '),
     pexelsApi: pexelsApi.value.trim(),
   };
 
